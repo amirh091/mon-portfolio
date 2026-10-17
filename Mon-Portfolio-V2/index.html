@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheikh Dev | Développeur Web &amp; Solutions Digitales</title>
+    <meta name="description" content="Portfolio de Cheikh Dev - Développeur Web et créateur de solutions digitales : E-Touré Service, Fad Boutique, Saga Chatt.">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Open Graph (aperçu lors des partages) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="Cheikh Dev | Développeur Web &amp; Solutions Digitales">
+    <meta property="og:description" content="Applications web sur mesure : logistique, gestion commerciale, messagerie.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Applique le thème AVANT le premier affichage (évite le flash blanc en mode sombre) -->
+    <script>
+        (function (d) {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (t !== 'dark' && t !== 'light') {
+                t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            d.dataset.theme = t;
+            d.classList.add('js');
+        })(document.documentElement);
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Scripts : versions épinglées + defer (ordre d'exécution conservé) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" crossorigin="anonymous"></script>
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+    <!-- Navigation -->
+    <header class="site-header">
+        <nav class="navbar" id="navbar" aria-label="Navigation principale">
+            <a href="#accueil" class="logo">Cheikh Dev<span class="logo-dot">.</span></a>
+
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list nav-list--left">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#apropos">À propos</a></li>
+                    <li><a href="#projets">Projets</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#temoignages">Témoignages</a></li>
+                </ul>
+                <ul class="nav-list nav-list--right">
+                    <li><a href="#competences">Compétences</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-actions">
+                <button id="theme-toggle" class="icon-btn" type="button" aria-label="Activer le thème sombre" aria-pressed="false">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button id="menu-toggle" class="icon-btn menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-menu">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Navigation par points (fixe, visible sur toute la page) -->
+    <nav class="scroll-dots" aria-label="Sections de la page">
+        <a class="scroll-dot is-active" href="#accueil" data-label="Accueil" aria-label="Accueil"></a>
+        <a class="scroll-dot" href="#apropos" data-label="À propos" aria-label="À propos"></a>
+        <a class="scroll-dot" href="#projets" data-label="Projets" aria-label="Projets"></a>
+        <a class="scroll-dot" href="#blog" data-label="Blog" aria-label="Blog"></a>
+        <a class="scroll-dot" href="#temoignages" data-label="Témoignages" aria-label="Témoignages"></a>
+        <a class="scroll-dot" href="#competences" data-label="Compétences" aria-label="Compétences"></a>
+        <a class="scroll-dot" href="#contact" data-label="Contact" aria-label="Contact"></a>
+    </nav>
+
+    <main id="main">
+        <!-- Hero -->
+        <section id="accueil" class="hero" aria-labelledby="hero-title">
+            <div id="particles-js" aria-hidden="true"></div>
+
+            <div class="hero-content">
+                <h1 class="hero-title" id="hero-title">Cheikh Dev</h1>
+                <p class="hero-subtitle">Développeur Web &amp; Créateur de Solutions Digitales</p>
+                <p class="hero-tagline">« Idée + Pratique = Projet Réalisé »</p>
+                <div class="hero-actions">
+                    <a href="#projets" class="btn btn-blue">Voir mes projets</a>
+                    <a href="#contact" class="btn btn-green">Me contacter</a>
+                    <a href="cv-cheikh-dev.pdf" class="btn btn-blue" download>
+                        <i class="fas fa-download" aria-hidden="true"></i> Télécharger mon CV
+                    </a>
+                </div>
+            </div>
+
+            <!-- Animation codeur (purement décorative) -->
+            <div class="coder" aria-hidden="true">
+                <!-- Homme + ZWJ + ordinateur = 👨‍💻 (l'original avait perdu le caractère de liaison) -->
+                <div class="coder-avatar">&#128104;&#8205;&#128187;</div>
+                <div class="code-window">
+                    <div class="window-header">
+                        <span class="window-dot window-dot--red"></span>
+                        <span class="window-dot window-dot--yellow"></span>
+                        <span class="window-dot window-dot--green"></span>
+                        <span class="window-title">cheikh_dev.js</span>
+                    </div>
+                    <div class="code-content" id="scrolling-code"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- À propos -->
+        <section id="apropos" class="section" aria-labelledby="apropos-title">
+            <div class="container">
+                <h2 class="section-title" id="apropos-title">À propos de moi</h2>
+                <div class="about-content reveal">
+                    <div class="about-text">
+                        <p>Passionné par le développement web, je conçois des applications sur mesure qui résolvent des problèmes concrets. De la gestion logistique avec <strong>E-Touré Service</strong> à la gestion commerciale avec <strong>Fad Boutique</strong>, en passant par la communication avec <strong>Saga Chatt</strong>, je maîtrise toute la chaîne de création.</p>
+                        <p>Mon objectif est simple : créer des outils digitaux fiables, rapides et élégants qui font grandir votre activité.</p>
+                    </div>
+                    <ul class="about-stats" role="list">
+                        <li class="stat-item">
+                            <span class="stat-value">3+</span>
+                            <span class="stat-label">Projets en ligne</span>
+                        </li>
+                        <li class="stat-item">
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Solutions sur mesure</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+       <section id="projets" class="section bg-light">
+    <div class="container">
+        <h2 class="section-title">Mes Réalisations</h2>
+        <p class="section-subtitle">Des solutions concrètes pour des besoins réels</p>
+        
+        <div class="projects-grid">
+            
+            <!-- Projet 1 : E-Touré Service (Desktop) -->
+            <div class="project-card fade-in-up">
+                <div class="project-image-wrapper">
+                    <img src="images/e-toure-service.png" alt="E-Touré Service - Site de transport" class="project-screenshot desktop">
+                </div>
+                <div class="project-info">
+                    <h3>E-Touré Service</h3>
+                    <p>Plateforme de transport (déménagement, livraison, dépannage) en France et Belgique. Inclut une application automatisée de gestion de devis/factures et un assistant virtuel.</p>
+                    <div class="project-tags">
+                        <span>Web App</span>
+                        <span>Automatisation</span>
+                        <span>Logistique</span>
+                    </div>
+                    <a href="https://e-toure-service.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn-small">Voir le projet <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+
+            <!-- Projet 2 : Fad Boutique (Desktop) -->
+            <div class="project-card fade-in-up">
+                <div class="project-image-wrapper">
+                    <img src="images/fad-boutique.png" alt="Fad Boutique - Gestion de stock" class="project-screenshot desktop">
+                </div>
+                <div class="project-info">
+                    <h3>Fad Boutique</h3>
+                    <p>Application web complète de gestion de stock, caisse enregistreuse et suivi des clients professionnels avec gestion de crédits et alertes de péremption.</p>
+                    <div class="project-tags">
+                        <span>Supabase</span>
+                        <span>Gestion</span>
+                        <span>PWA</span>
+                    </div>
+                    <a href="https://fadboutique.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn-small">Voir le projet <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+
+            <!-- Projet 3 : Saga Chatt (Mobile) -->
+            <div class="project-card fade-in-up">
+                <div class="project-image-wrapper mobile-frame">
+                    <img src="images/saga-chatt.png" alt="Saga Chatt - Messagerie instantanée" class="project-screenshot mobile">
+                </div>
+                <div class="project-info">
+                    <h3>Saga Chatt</h3>
+                    <p>Application de messagerie instantanée moderne et fluide, conçue pour offrir une expérience de communication en temps réel simple et sécurisée.</p>
+                    <div class="project-tags">
+                        <span>Temps réel</span>
+                        <span>UI/UX</span>
+                        <span>Communication</span>
+                    </div>
+                    <a href="https://saga-chatt.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn-small">Voir le projet <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+                <!-- Études de cas -->
+                <div class="case-studies" aria-labelledby="cases-title">
+                    <h3 class="case-studies-title" id="cases-title">Études de cas</h3>
+                    <p class="case-studies-intro">Le besoin, la solution, et ce que ça a changé.</p>
+
+                    <!--
+                        POUR AJOUTER UNE VRAIE CAPTURE : remplace le contenu de <div class="case-shot ..."> par
+                        <img src="img/etoure-service.webp" alt="Capture de l'application de devis E-Touré Service" width="800" height="500" loading="lazy">
+                        Si tu as des chiffres réels (temps gagné, nombre d'utilisateurs…), ajoute-les dans « Résultat ».
+                    -->
+
+                    <article class="case-study reveal">
+                        <div class="case-shot grad-logistics">
+                            <i class="fas fa-truck-moving" aria-hidden="true"></i>
+                        </div>
+                        <div class="case-body">
+                            <h4>E-Touré Service</h4>
+                            <p class="case-meta">Transport et logistique · France et Belgique</p>
+                            <dl class="case-details">
+                                <div>
+                                    <dt>Le problème</dt>
+                                    <dd>Les devis et les factures se faisaient à la main : lent, source d'erreurs, et difficile à suivre entre deux pays.</dd>
+                                </div>
+                                <div>
+                                    <dt>La solution</dt>
+                                    <dd>Un site vitrine pour les services (déménagement, livraison, dépannage), une application qui automatise devis et factures, et un assistant virtuel pour répondre aux demandes.</dd>
+                                </div>
+                                <div>
+                                    <dt>Le résultat</dt>
+                                    <dd>Le fondateur gagne un temps précieux au quotidien sur la gestion des devis et factures.</dd>
+                                </div>
+                            </dl>
+                            <ul class="project-tags" role="list"><li>Web App</li><li>Automatisation</li><li>Netlify</li></ul>
+                        </div>
+                    </article>
+
+                    <article class="case-study reveal">
+                        <div class="case-shot grad-shop">
+                            <i class="fas fa-store" aria-hidden="true"></i>
+                        </div>
+                        <div class="case-body">
+                            <h4>Fad Boutique</h4>
+                            <p class="case-meta">Commerce · gestion de stock et de caisse</p>
+                            <dl class="case-details">
+                                <div>
+                                    <dt>Le problème</dt>
+                                    <dd>Des produits périmés non repérés à temps, et des crédits clients professionnels difficiles à suivre.</dd>
+                                </div>
+                                <div>
+                                    <dt>La solution</dt>
+                                    <dd>Une application web installable (PWA) qui réunit stock, caisse enregistreuse et suivi des clients, avec alertes de péremption et gestion des crédits, appuyée sur Supabase.</dd>
+                                </div>
+                                <div>
+                                    <dt>Le résultat</dt>
+                                    <dd>Le propriétaire ne perd plus d'argent sur les produits périmés et suit les crédits de ses clients pro au même endroit.</dd>
+                                </div>
+                            </dl>
+                            <ul class="project-tags" role="list"><li>Supabase</li><li>PWA</li><li>Gestion</li></ul>
+                        </div>
+                    </article>
+
+                    <article class="case-study reveal">
+                        <div class="case-shot grad-chat">
+                            <i class="fas fa-comments" aria-hidden="true"></i>
+                        </div>
+                        <div class="case-body">
+                            <h4>Saga Chatt</h4>
+                            <p class="case-meta">Messagerie · version bêta</p>
+                            <dl class="case-details">
+                                <div>
+                                    <dt>Le problème</dt>
+                                    <dd>Les grosses applications de messagerie sont lourdes et chargées de fonctions que beaucoup n'utilisent pas.</dd>
+                                </div>
+                                <div>
+                                    <dt>La solution</dt>
+                                    <dd>Une messagerie instantanée simple et légère, pensée pour la fluidité et la communication en temps réel.</dd>
+                                </div>
+                                <div>
+                                    <dt>Le résultat</dt>
+                                    <dd>Les premiers utilisateurs de la bêta soulignent une interface moderne et des messages envoyés instantanément.</dd>
+                                </div>
+                            </dl>
+                            <ul class="project-tags" role="list"><li>Temps réel</li><li>UI/UX</li><li>Communication</li></ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog -->
+        <section id="blog" class="section blog-section" aria-labelledby="blog-title">
+            <div class="container">
+                <div class="blog-heading">
+                    <div>
+                        <p class="blog-eyebrow">Le carnet du développeur</p>
+                        <h2 class="section-title" id="blog-title">Idées, méthodes et retours de terrain</h2>
+                    </div>
+                    <p class="blog-intro">Des notes autour de la création d'applications utiles, de l'automatisation et des choix qui font la différence dans un projet.</p>
+                </div>
+
+                <div class="blog-grid">
+                    <article class="blog-card reveal">
+                        <div class="blog-card-top"><span class="blog-category">Méthode</span><span class="blog-number">01</span></div>
+                        <h3>De l'idée à une application vraiment utile</h3>
+                        <p>Clarifier le besoin, choisir une première version simple et tester tôt : les étapes pour transformer une idée en outil concret.</p>
+                        <div class="blog-card-bottom"><span>Guide pratique</span><span class="blog-status">À venir</span></div>
+                    </article>
+
+                    <article class="blog-card blog-card--featured reveal">
+                        <div class="blog-card-top"><span class="blog-category">Retour de projet</span><span class="blog-number">02</span></div>
+                        <h3>Automatiser les devis sans compliquer le quotidien</h3>
+                        <p>Ce que la création d'un outil de devis et de facturation m'a appris sur les vrais besoins d'une activité de transport.</p>
+                        <div class="blog-card-bottom"><span>E-Touré Service</span><span class="blog-status">À venir</span></div>
+                    </article>
+
+                    <article class="blog-card reveal">
+                        <div class="blog-card-top"><span class="blog-category">Applications métier</span><span class="blog-number">03</span></div>
+                        <h3>Une gestion de stock pensée pour le terrain</h3>
+                        <p>Alertes, crédits clients et caisse : organiser les bonnes informations pour aider une boutique à mieux piloter son activité.</p>
+                        <div class="blog-card-bottom"><span>Fad Boutique</span><span class="blog-status">À venir</span></div>
+                    </article>
+                </div>
+
+                <p class="blog-contact">Un sujet vous intéresse ? <a href="#contact">Parlons de votre projet <i class="fas fa-arrow-right" aria-hidden="true"></i></a></p>
+            </div>
+        </section>
+
+        <!-- Témoignages -->
+        <section id="temoignages" class="section" aria-labelledby="temoignages-title">
+            <div class="container">
+                <h2 class="section-title" id="temoignages-title">Ce qu'ils disent de mon travail</h2>
+                <p class="section-subtitle">Retours de clients et partenaires sur mes projets récents</p>
+
+                <div class="testimonials-grid">
+                    <article class="testimonial-card reveal">
+                        <header class="testimonial-header">
+                            <div class="client-avatar grad-logistics"><i class="fas fa-truck" aria-hidden="true"></i></div>
+                            <div class="client-info">
+                                <h3>Touré Cheick Hamed</h3>
+                                <p class="client-role">Fondateur, E-Touré Service</p>
+                                <div class="stars" role="img" aria-label="Note : 5 sur 5">
+                                    <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </header>
+                        <blockquote class="testimonial-content">
+                            <i class="fas fa-quote-left quote-icon" aria-hidden="true"></i>
+                            <p>Cheikh a transformé notre façon de gérer les devis et factures. L'application automatisée nous fait gagner un temps précieux au quotidien. Un travail sérieux, à l'écoute et très professionnel !</p>
+                        </blockquote>
+                        <footer class="testimonial-footer"><span class="project-tag">E-Touré Service</span></footer>
+                    </article>
+
+                    <article class="testimonial-card reveal">
+                        <header class="testimonial-header">
+                            <div class="client-avatar grad-shop"><i class="fas fa-store" aria-hidden="true"></i></div>
+                            <div class="client-info">
+                                <h3>Fadiga Oumar</h3>
+                                <p class="client-role">Propriétaire, Fad Boutique</p>
+                                <div class="stars" role="img" aria-label="Note : 5 sur 5">
+                                    <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </header>
+                        <blockquote class="testimonial-content">
+                            <i class="fas fa-quote-left quote-icon" aria-hidden="true"></i>
+                            <p>Grâce à l'application de gestion de stock, je ne perds plus d'argent avec les produits périmés. La gestion des clients pro avec suivi des crédits est un vrai plus pour mon business. Je recommande !</p>
+                        </blockquote>
+                        <footer class="testimonial-footer"><span class="project-tag">Fad Boutique</span></footer>
+                    </article>
+
+                    <article class="testimonial-card reveal">
+                        <header class="testimonial-header">
+                            <div class="client-avatar grad-chat"><i class="fas fa-comments" aria-hidden="true"></i></div>
+                            <div class="client-info">
+                                <h3>Mateo Vargas</h3>
+                                <p class="client-role">Utilisateur Beta, Saga Chatt</p>
+                                <div class="stars" role="img" aria-label="Note : 4,5 sur 5">
+                                    <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </header>
+                        <blockquote class="testimonial-content">
+                            <i class="fas fa-quote-left quote-icon" aria-hidden="true"></i>
+                            <p>Interface moderne et fluide, les messages s'envoient instantanément. Enfin une alternative simple et légère aux grosses applications de messagerie. Bravo pour le design et la réactivité !</p>
+                        </blockquote>
+                        <footer class="testimonial-footer"><span class="project-tag">Saga Chatt</span></footer>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compétences -->
+        <section id="competences" class="section section--alt" aria-labelledby="competences-title">
+            <div class="container">
+                <h2 class="section-title" id="competences-title">Mes Compétences</h2>
+                <ul class="skills-grid reveal" role="list">
+                    <li class="skill-item"><i class="fab fa-html5" aria-hidden="true"></i><span>HTML5</span></li>
+                    <li class="skill-item"><i class="fab fa-css3-alt" aria-hidden="true"></i><span>CSS3</span></li>
+                    <li class="skill-item"><i class="fab fa-js" aria-hidden="true"></i><span>JavaScript</span></li>
+                    <li class="skill-item"><i class="fas fa-database" aria-hidden="true"></i><span>Supabase</span></li>
+                    <li class="skill-item"><i class="fas fa-cloud" aria-hidden="true"></i><span>Netlify</span></li>
+                    <li class="skill-item"><i class="fas fa-mobile-alt" aria-hidden="true"></i><span>Responsive Design</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section contact" aria-labelledby="contact-title">
+            <div class="container">
+                <h2 class="section-title" id="contact-title">Travaillons ensemble</h2>
+                <p class="contact-intro">Vous avez un projet en tête ? N'hésitez pas à me contacter.</p>
+
+                <div class="contact-container">
+                    <form id="contact-form" class="contact-form" method="post" action="#">
+                        <div class="form-group">
+                            <label class="sr-only" for="name">Votre nom</label>
+                            <input type="text" id="name" name="name" placeholder="Votre nom" autocomplete="name" maxlength="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="email">Votre e-mail</label>
+                            <input type="email" id="email" name="email" placeholder="Votre email" autocomplete="email" inputmode="email" maxlength="254" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="subject">Sujet</label>
+                            <input type="text" id="subject" name="subject" placeholder="Sujet" maxlength="120" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="message">Votre message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Votre message" minlength="10" maxlength="2000" required></textarea>
+                        </div>
+
+                        <!-- Piège à robots (honeypot) : invisible pour les humains -->
+                        <div class="hp-field" aria-hidden="true">
+                            <label for="website">Ne pas remplir ce champ</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="submit-btn">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            <span class="btn-label">Envoyer le message</span>
+                        </button>
+                        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+                        <noscript><p class="form-status is-error">JavaScript est requis pour envoyer le formulaire. Écrivez-moi directement par e-mail.</p></noscript>
+                    </form>
+
+                    <ul class="contact-info" role="list">
+                        <li class="contact-item">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <a href="mailto:faruckh091@gmail.com">faruckh091@gmail.com</a>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                            <div>
+                                <h3>WhatsApp</h3>
+                                <a href="https://wa.me/2250709133688" target="_blank" rel="noopener noreferrer">+225 07 09 13 36 88</a>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                            <div>
+                                <h3>GitHub</h3>
+                                <a href="https://github.com/amirh091?tab=repositories" target="_blank" rel="noopener noreferrer">Voir mes projets</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="year">2026</span> Cheikh Dev. Tous droits réservés. Fait avec <i class="fas fa-heart heart" aria-hidden="true"></i><span class="sr-only">amour</span> et beaucoup de café.</p>
+    </footer>
+    <!-- ============================================
+     ASSISTANT VIRTUEL (CHATBOT)
+     ============================================ -->
+<div id="chat-widget">
+    <!-- Bouton flottant pour ouvrir le chat -->
+    <button id="chat-toggle" class="chat-toggle-btn" aria-label="Ouvrir le chat">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <!-- Fenêtre de chat -->
+    <div id="chat-window" class="chat-window">
+        <div class="chat-header">
+            <div class="chat-avatar">🤖</div>
+            <div class="chat-info">
+                <h4>Cheikh Assistant</h4>
+                <span class="status">En ligne</span>
+            </div>
+            <button id="chat-close" class="chat-close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div id="chat-messages" class="chat-messages">
+            <!-- Les messages apparaîtront ici -->
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Posez votre question..." autocomplete="off">
+            <button id="chat-send"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
